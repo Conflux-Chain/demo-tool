@@ -1,0 +1,9 @@
+services:
+  web:
+    build:
+      context: .
+      args:
+        # request data url
+        VITE_REQUEST_URL: 
+    ports:
+      - 8000:3000

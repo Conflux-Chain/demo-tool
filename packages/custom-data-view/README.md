@@ -28,3 +28,25 @@ copy ./example.env .env
 ```bash
 pnpm build
 ```
+
+
+# Use with docker compose
+
+first of all you need set the request url
+
+```yml
+services:
+  web:
+    build:
+      context: .
+      args:
+        VITE_REQUEST_URL: # update this  https://example.com/getJsonData
+    ports:
+      - 8000:3000
+```
+
+then you can use with docker compose
+
+```bash
+docker compose up --build
+```

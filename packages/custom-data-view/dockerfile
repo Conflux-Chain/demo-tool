@@ -1,0 +1,19 @@
+FROM node:22-alpine
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+RUN pnpm install http-server -g
+ARG VITE_REQUEST_URL
+
+ENV VITE_REQUEST_URL=$VITE_REQUEST_URL
+WORKDIR /app
+
+COPY ./package.json ./package.json
+
+RUN pnpm install
+
+COPY . .
+
+RUN  pnpm build
+
+CMD [ "http-server", "./dist", "-p", "3000" ]

@@ -4,7 +4,6 @@
 pnpm install
 ```
 
-
 # Run
 
 ```bash
@@ -19,6 +18,8 @@ add the env to set the request url
 copy ./example.env .env
 
 # then you can set the url in .env
+# example: 
+#VITE_REQUEST_URL=https://example.com/getJsonData
 ```
 
 # Build

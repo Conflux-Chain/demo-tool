@@ -1,3 +1,7 @@
+body {
+  background-color: #f1f3f9;
+  --text-color: '#282d30'
+}
 html,
 body,
 #root {

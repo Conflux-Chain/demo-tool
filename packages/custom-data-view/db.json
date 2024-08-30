@@ -1,24 +1,27 @@
 {
-	"data": [
-		{ "key": "基本", "value": "基本值" },
-		{ "key": "含有空格", "value": "树 图" },
-		{ "key": "Unicode", "value": "🔥 0.1 CFX" },
-		{ "key": "空值", "value": "" },
-		{ "key": "有色文字", "value": "有色文字", "color": "red" },
-		{
-			"key": "链接",
-			"value": "可跳转内容",
-			"url": "https://confluxscan.io/"
-		},
-		{ "key": "时间", "value": "1724840365", "timestamp": true },
-		{ "key": "剪贴板", "value": "被复制内容", "clipboard": true },
-		{
-			"key": "剪贴板与链接",
-			"value": "被复制内容",
-			"url": "https://confluxscan.io/",
-			"clipboard": true
-		},
-		{ "key": "缩进", "value": "一级缩进", "spanLevel": 1 },
-		{ "key": "二级缩进", "value": "二级缩进", "spanLevel": 2 }
-	]
+	"data": {
+		"title": "标题",
+		"body": [
+			{ "key": "基本", "value": "基本值" },
+			{ "key": "含有空格", "value": "树 图" },
+			{ "key": "Unicode", "value": "🔥 0.1 CFX" },
+			{ "key": "空值", "value": "" },
+			{ "key": "有色文字", "value": "有色文字", "color": "red" },
+			{
+				"key": "链接",
+				"value": "可跳转内容",
+				"url": "https://confluxscan.io/"
+			},
+			{ "key": "时间", "value": "1724840365", "timestamp": true },
+			{ "key": "剪贴板", "value": "被复制内容", "clipboard": true },
+			{
+				"key": "剪贴板与链接",
+				"value": "被复制内容",
+				"url": "https://confluxscan.io/",
+				"clipboard": true
+			},
+			{ "key": "缩进", "value": "一级缩进", "spanLevel": 1 },
+			{ "key": "二级缩进", "value": "二级缩进", "spanLevel": 2 }
+		]
+	}
 }

@@ -3,7 +3,6 @@ import { useDisclosure } from "@mantine/hooks";
 import {
   Anchor,
   Box,
-  Button,
   Container,
   CopyButton,
   Flex,
@@ -12,12 +11,19 @@ import {
   Skeleton,
   Table,
   Text,
+  Title,
 } from "@mantine/core";
 import "./App.css";
 import { useCallback, useEffect, useState } from "react";
 import dayjs from "dayjs";
+import { IconCopy, IconCopyCheck } from "@tabler/icons-react";
 
 export interface TableData {
+  title: string;
+  body: TableDataBody[];
+}
+
+export interface TableDataBody {
   key: string;
   value: string;
   color?: string;
@@ -28,7 +34,7 @@ export interface TableData {
 }
 
 function App() {
-  const [data, setData] = useState<TableData[]>([]);
+  const [data, setData] = useState<TableData>();
   const [loading, { open, close }] = useDisclosure(true);
 
   useEffect(() => {
@@ -48,15 +54,24 @@ function App() {
       .catch((e) => console.error(e));
   }, [open, close]);
 
-  const renderValue = useCallback((item: TableData) => {
+  const renderValue = useCallback((item: TableDataBody) => {
     const value = item.timestamp
       ? dayjs.unix(Number(item.value)).format("YYYY-MM-DD HH:mm:ss Z")
       : item.value;
-    let ShowValue = <Text c={item.color}>{value}</Text>;
+    let ShowValue = (
+      <Text size="sm" c={item.color}>
+        {value}
+      </Text>
+    );
 
     if (item.url) {
       ShowValue = (
-        <Anchor href={item.url} target="_blank" underline="always">
+        <Anchor
+          href={item.url}
+          target="_blank"
+          underline="always"
+          c={"#1e3de4"}
+        >
           {ShowValue}
         </Anchor>
       );
@@ -67,11 +82,13 @@ function App() {
         <Flex gap={10} align={"center"}>
           {ShowValue}
           <CopyButton value={item.value}>
-            {({ copied, copy }) => (
-              <Button color={copied ? "teal" : "blue"} onClick={copy}>
-                {copied ? "Copied" : "Copy"}
-              </Button>
-            )}
+            {({ copied, copy }) =>
+              copied ? (
+                <IconCopyCheck color="#74798c" size={16} />
+              ) : (
+                <IconCopy onClick={copy} color="#74798c" size={16} />
+              )
+            }
           </CopyButton>
         </Flex>
       );
@@ -83,7 +100,18 @@ function App() {
   return (
     <MantineProvider>
       <Container size={"lg"} miw={500} pt={"lg"}>
-        <Box pos="relative" h={loading ? 400 : "auto"} className="box" p={20}>
+        {data?.title && (
+          <Title mb={20} c={"#1a1a1a"}>
+            {data.title}
+          </Title>
+        )}
+        <Box
+          pos="relative"
+          h={loading ? 400 : "auto"}
+          className="box"
+          p={10}
+          bg={"white"}
+        >
           <LoadingOverlay
             visible={loading}
             zIndex={1000}
@@ -97,12 +125,12 @@ function App() {
               <Skeleton h={20} />
             </Flex>
           ) : (
-            <Table striped highlightOnHover>
+            <Table highlightOnHover>
               <Table.Tbody>
-                {data.map((item) => (
+                {data?.body.map((item) => (
                   <Table.Tr key={item.key}>
                     <Table.Td w={350}>
-                      <Text>
+                      <Text size="sm" c="#74798c">
                         {item.spanLevel
                           ? `└${"─".repeat(Math.max(item.spanLevel - 1, 0))} `
                           : ""}
